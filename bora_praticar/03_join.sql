@@ -1,7 +1,31 @@
 -- Qual mês tivemos mais lista de presença assinda?
 SELECT
-    substr (t1.DtCriacao, 1, 7) AS anoMes,
-    count(distinct t1.IdTransacao) AS qtdeTransacao
+    *
+FROM
+    transacoes
+LIMIT
+    10;
+
+-------------------------------------------------------------------------------
+SELECT
+    *
+FROM
+    transacao_produto
+LIMIT
+    10;
+
+-------------------------------------------------------------------------------
+SELECT
+    *
+FROM
+    produtos
+LIMIT
+    10;
+
+-------------------------------------------------------------------------------
+SELECT
+    strftime ('%m', t1.dtCriacao) AS Mes,
+    COUNT(DISTINCT t1.IdTransacao) AS QtdeTransacoes
 FROM
     transacoes AS t1
     LEFT JOIN transacao_produto AS t2 ON t1.IdTransacao = t2.IdTransacao
@@ -9,6 +33,8 @@ FROM
 WHERE
     t3.DescNomeProduto = 'Lista de presença'
 GROUP BY
-    substr (t1.DtCriacao, 1, 7)
+    Mes
 ORDER BY
-    qtdeTransacao DESC
+    QtdeTransacoes DESC
+LIMIT
+    1;

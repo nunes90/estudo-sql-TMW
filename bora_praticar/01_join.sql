@@ -2,24 +2,36 @@
 SELECT
     *
 FROM
-    transacao_produto
+    produtos
 LIMIT
-    5;
+    10;
 
+-------------------------------------------------------------------------------
 SELECT
     *
 FROM
-    produtos
-LIMIT
-    5;
-
-SELECT
-    descCategoriaProduto AS Categoria,
-    count(transacao_produto.IdTransacao) AS QtdeTransacoes
-FROM
     transacao_produto
-    INNER JOIN produtos ON transacao_produto.IdProduto = produtos.IdProduto
+LIMIT
+    10;
+
+-------------------------------------------------------------------------------
+SELECT
+    *
+FROM
+    transacoes
+LIMIT
+    10;
+
+-------------------------------------------------------------------------------
+SELECT
+    COUNT(DISTINCT t1.IdTransacao) AS QtdeTransacoes,
+    t2.DescCategoriaProduto AS Categoria
+FROM
+    transacao_produto AS t1
+    LEFT JOIN produtos AS t2 ON t1.IdProduto = t2.IdProduto
 GROUP BY
-    descCategoriaProduto
+    t2.DescCategoriaProduto
 ORDER BY
-    QtdeTransacoes DESC;
+    QtdeTransacoes DESC
+LIMIT
+    1;

@@ -1,11 +1,18 @@
-SELECT 'Olá Mundo!';
+SELECT
+       'Olá Mundo!';
 
--- SELECT * FROM clientes;
+-------------------------------------------------------------------------------
+SELECT
+       *
+FROM
+       clientes;
 
-SELECT IdCliente, 
-       QtdePontos, 
-       DtCriacao 
-
-FROM clientes
-
-LIMIT 10;
+-------------------------------------------------------------------------------
+SELECT
+       idCliente,
+       QtdePontos,
+       DtCriacao
+FROM
+       clientes
+LIMIT
+       10;

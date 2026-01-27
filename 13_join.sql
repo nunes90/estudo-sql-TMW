@@ -1,4 +1,20 @@
 SELECT
+    *
+FROM
+    transacao_produto
+LIMIT
+    10;
+
+-------------------------------------------------------------------------------
+SELECT
+    *
+FROM
+    produtos
+LIMIT
+    10;
+
+-------------------------------------------------------------------------------
+SELECT
     t1.*,
     t2.DescNomeProduto
 FROM
@@ -7,4 +23,4 @@ FROM
 WHERE
     t2.IdProduto IS NULL
 LIMIT
-    100
+    100;

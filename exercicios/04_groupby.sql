@@ -1,17 +1,26 @@
 -- 4. Quantos produtos sao de rpg?
 SELECT
-    count(*) AS QtdeRPG
+    *
+FROM
+    produtos
+LIMIT
+    10;
+
+-------------------------------------------------------------------------------
+SELECT
+    COUNT(*) AS QtdeProdutos
 FROM
     produtos
 WHERE
-    descCategoriaProduto = 'rpg';
+    DescCategoriaProduto = 'rpg';
 
+-------------------------------------------------------------------------------
 SELECT
-    descCategoriaProduto AS Categoria,
-    count(*) AS QtdeRPG
+    DescCategoriaProduto,
+    COUNT(*) AS QtdeProdutos
 FROM
     produtos
 GROUP BY
-    descCategoriaProduto
+    DescCategoriaProduto
 ORDER BY
-    QtdeRPG DESC;
+    QtdeProdutos DESC;

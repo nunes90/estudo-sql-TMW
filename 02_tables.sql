@@ -7,4 +7,3 @@
 -- \dt
 -- MySQL
 -- SHOW TABLES;
-

@@ -1,10 +1,20 @@
--- 8. Qual o produto com pontos transacionados? 
+-- 8. Qual o produto com mais pontos transacionados?
+SELECT
+    *
+FROM
+    transacao_produto
+LIMIT
+    10;
+
+-------------------------------------------------------------------------------
 SELECT
     IdProduto AS Produto,
-    sum(VlProduto * QtdeProduto) AS Total
+    SUM(vlProduto * QtdeProduto) AS Total
 FROM
     transacao_produto
 GROUP BY
-    1
+    IdProduto
 ORDER BY
-    2 DESC
+    Total DESC
+LIMIT
+    1;

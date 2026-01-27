@@ -1,12 +1,20 @@
 -- 7. Qual o produto mais transacionado?
 SELECT
+    *
+FROM
+    transacao_produto
+LIMIT
+    10;
+
+-------------------------------------------------------------------------------
+SELECT
     IdProduto AS Produto,
-    count(IdTransacao) AS QtdeTransacoes
+    COUNT(DISTINCT IdTransacao) AS QtdeTransacoes
 FROM
     transacao_produto
 GROUP BY
-    1
+    IdProduto
 ORDER BY
-    2 DESC
+    QtdeTransacoes DESC
 LIMIT
-    1
+    1;

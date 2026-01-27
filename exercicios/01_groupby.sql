@@ -1,5 +1,13 @@
 -- 1. Quantos clientes tem email cadastrado?
 SELECT
-    sum(flEmail) AS QtdeEmail
+    *
 FROM
     clientes
+LIMIT
+    10;
+
+-------------------------------------------------------------------------------
+SELECT
+    SUM(flEmail) AS QtdeEmail
+FROM
+    clientes;
