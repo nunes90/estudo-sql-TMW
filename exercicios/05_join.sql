@@ -32,8 +32,4 @@ LIMIT
 
 -------------------------------------------------------------------------------
 SELECT
-    *,
-    MIN(t.dtCriacao),
-    MAX(t.dtCriacao)
 FROM
-    transacoes AS t;

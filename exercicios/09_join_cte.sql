@@ -1,4 +1,4 @@
--- CTE: COMMON TABLE EXPRESSIONS
+-- 9. Dos clientes que começaram SQL no primeiro dia, quantos chegaram ao 5o dia?
 WITH
     tb_cliente_primeiro_dia AS (
         SELECT DISTINCT

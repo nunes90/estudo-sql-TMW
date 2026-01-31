@@ -17,9 +17,7 @@ WITH
         FROM
             transacoes
         WHERE
-            -- substr (DtCriacao, 1, 10) BETWEEN '2025-08-25' AND '2025-08-29'
-            DtCriacao >= '2025-08-25'
-            AND DtCriacao < '2025-08-30'
+            substr (DtCriacao, 1, 10) BETWEEN '2025-08-25' AND '2025-08-29'
         ORDER BY
             IdCliente
     ),
@@ -36,6 +34,8 @@ WITH
     )
     -- Cálculo da média de dias no curso
 SELECT
-    AVG(QuantidadeDiasNoCurso) AS MediaDiasNoCurso
+    AVG(QuantidadeDiasNoCurso) AS MediaDiasNoCurso,
+    MAX(QuantidadeDiasNoCurso) AS MaxDiasNoCurso,
+    MIN(QuantidadeDiasNoCurso) AS MinDiasNoCurso
 FROM
     tb_cliente_dias;
