@@ -33,7 +33,7 @@ WITH
                     IdCliente
                 ORDER BY
                     qtdInteracoes DESC,
-                    dtDia
+                    dtDia DESC
             ) AS rn
         FROM
             tb_dia_cliente
