@@ -8,6 +8,9 @@
 -- ✔️ 8. Dias da semana mais ativos (D28)
 -- ✔️ 9. Período do dia mais ativo (D28)
 -- ✔️ 10. Engajamento em D28 versus Vida
+-------------------------------------------------------------------------------
+-- DROP TABLE IF EXISTS tb_feature_store_cliente;
+-- CREATE TABLE tb_feature_store_cliente AS
 WITH
     tb_transacoes AS (
         SELECT
@@ -15,7 +18,7 @@ WITH
             IdCliente,
             QtdePontos,
             datetime (substr (DtCriacao, 1, 19)) as dtCriacao,
-            julianday ('now') - julianday (substr (dtCriacao, 1, 10)) AS diffDate,
+            julianday ('2025-08-01') - julianday (substr (dtCriacao, 1, 10)) AS diffDate,
             CAST(strftime ('%H', dtCriacao) AS INTEGER) AS dtHora
         FROM
             transacoes
@@ -26,7 +29,7 @@ WITH
         SELECT DISTINCT
             IdCliente,
             datetime (substr (DtCriacao, 1, 19)) AS dtCriacao,
-            julianday ('now') - julianday (substr (dtCriacao, 1, 10)) AS idadeBase
+            julianday ('2025-08-01') - julianday (substr (dtCriacao, 1, 10)) AS idadeBase
         FROM
             clientes
     ),
@@ -296,6 +299,8 @@ WITH
             LEFT JOIN tb_cliente_periodo_rn AS t9 ON t1.IdCliente = t9.IdCliente
             AND t9.rnPeriodo = 1
     )
+    -- INSERT INTO
+    -- tb_feature_store_cliente
 SELECT
     '2025-08-01' AS dtRef,
     *,
@@ -308,3 +313,11 @@ SELECT
     END AS engajamento28Vida
 FROM
     tb_join;
+
+SELECT
+    *
+FROM
+    tb_feature_store_cliente
+ORDER BY
+    IdCliente,
+    dtRef;
