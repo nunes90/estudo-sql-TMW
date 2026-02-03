@@ -18,18 +18,18 @@ WITH
             IdCliente,
             QtdePontos,
             datetime (substr (DtCriacao, 1, 19)) as dtCriacao,
-            julianday ('2025-08-01') - julianday (substr (dtCriacao, 1, 10)) AS diffDate,
+            julianday ('{date}') - julianday (substr (dtCriacao, 1, 10)) AS diffDate,
             CAST(strftime ('%H', dtCriacao) AS INTEGER) AS dtHora
         FROM
             transacoes
         WHERE
-            dtCriacao < '2025-08-01'
+            dtCriacao < '{date}'
     ),
     tb_cliente AS (
         SELECT DISTINCT
             IdCliente,
             datetime (substr (DtCriacao, 1, 19)) AS dtCriacao,
-            julianday ('2025-08-01') - julianday (substr (dtCriacao, 1, 10)) AS idadeBase
+            julianday ('{date}') - julianday (substr (dtCriacao, 1, 10)) AS idadeBase
         FROM
             clientes
     ),
@@ -302,7 +302,7 @@ WITH
     -- INSERT INTO
     -- tb_feature_store_cliente
 SELECT
-    '2025-08-01' AS dtRef,
+    '{date}' AS dtRef,
     *,
     -- Quanto pct das transacoes feitas nos ultimas 28 dias,
     -- correspondem ao todo de transacoes feitas pelo cliente
@@ -314,10 +314,10 @@ SELECT
 FROM
     tb_join;
 
-SELECT
-    *
-FROM
-    tb_feature_store_cliente
-ORDER BY
-    IdCliente,
-    dtRef;
+-- SELECT
+--     *
+-- FROM
+--     tb_feature_store_cliente
+-- ORDER BY
+--     IdCliente,
+--     dtRef;
