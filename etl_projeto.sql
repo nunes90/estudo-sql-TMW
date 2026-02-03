@@ -19,6 +19,8 @@ WITH
             CAST(strftime ('%H', dtCriacao) AS INTEGER) AS dtHora
         FROM
             transacoes
+        WHERE
+            dtCriacao < '2025-08-01'
     ),
     tb_cliente AS (
         SELECT DISTINCT
@@ -267,7 +269,8 @@ WITH
         SELECT
             t1.*,
             t2.idadeBase,
-            t3.DescNomeProduto AS produtoVida,
+            -- t3.DescNomeProduto AS produtoVida,
+            COALESCE(t3.DescNomeProduto, 'SEM PRODUTO') AS produtoVida,
             t4.DescNomeProduto AS produto56,
             t5.DescNomeProduto AS produto28,
             t6.DescNomeProduto AS produto14,
@@ -289,14 +292,19 @@ WITH
             LEFT JOIN tb_cliente_produto_rn AS t7 ON t1.IdCliente = t7.IdCliente
             AND t7.rn7 = 1
             LEFT JOIN tb_cliente_dia_rn AS t8 ON t1.IdCliente = t8.IdCliente
-            AND t8.rnDia = 1 LEFT
+            AND t8.rnDia = 1
             LEFT JOIN tb_cliente_periodo_rn AS t9 ON t1.IdCliente = t9.IdCliente
             AND t9.rnPeriodo = 1
     )
 SELECT
+    '2025-08-01' AS dtRef,
     *,
     -- Quanto pct das transacoes feitas nos ultimas 28 dias,
     -- correspondem ao todo de transacoes feitas pelo cliente
-    1. * QtdeTransacoesD28 / qtdeTransacoesVida AS engajamento28Vida
+    -- 1. * QtdeTransacoesD28 / qtdeTransacoesVida AS engajamento28Vida
+    CASE
+        WHEN qtdeTransacoesVida > 0 THEN 1.0 * QtdeTransacoesD28 / qtdeTransacoesVida
+        ELSE 0
+    END AS engajamento28Vida
 FROM
     tb_join;
